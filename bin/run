@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# kodi-fleet — Kodi addon + handoff fleet rig (bin/run).
+# Primary operation: the fleet deploys Kodi addons (Lasso, manifold-upstream) to
+# LAN Kodi hosts. bin/run documents the deploy surface; the in-repo code is the
+# addons tree (the kodi-handoff CLI referenced in README lives outside this repo).
+# Usage: bin/run
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+echo "== kodi-fleet run: deploy surface =="
+echo "Addons in repo: $(find addons -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sed 's#addons/##' | tr '\n' ' ')"
+echo "Deploy host examples (README mermaid):"
+echo "  - 246 CoreELEC (AWG + LAN route)"
+echo "  - 225 Android TV (Kodi 21.2, JSON-RPC)"
+echo "Handoff CLI (README, NOT in this repo): /home/toxic/bin/kodi-handoff <src> <dst> [--play] | --dry-run"
+echo "Run bin/check for addon code integrity."
+echo "OK: kodi-fleet deploy surface documented"

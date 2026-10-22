@@ -1,0 +1,7 @@
+# kodi-fleet — autonomous rig task wiring (Phase-B).
+# bin/run = deploy surface doc; bin/check = addon python compile gate.
+
+[tasks]
+run = "./bin/run"
+check = "./bin/check"
+compile = "python3 -m py_compile addons/lasso/resources/lib/modules/utils.py"
