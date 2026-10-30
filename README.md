@@ -1,7 +1,7 @@
 <div align="right">
 
-[![License: MIT](https://img.shields.io/badge/license-MIT%20%2B%20upstream-blue?style=for-the-badge)](https://github.com/toxicwind/sovereign-projects#license)
-[![sovereign-projects](https://img.shields.io/badge/sovereign--projects-kodi-fleet-blue?style=for-the-badge)](https://github.com/toxicwind/sovereign-projects)
+[![License: MIT](https://img.shields.io/badge/license-MIT%20%2B%20upstream-blue?style=for-the-badge)](https://github.com/toxicwind/kodi-fleet#license)
+[![kodi-fleet](https://img.shields.io/badge/kodi--fleet-standalone-blue?style=for-the-badge)](https://github.com/toxicwind/kodi-fleet)
 
 </div>
 
@@ -16,8 +16,11 @@ flowchart LR
 
 # kodi-fleet
 
-One-shot Kodi tooling + audit for the two-box fleet. Lives in the sovereign repo;
-runs from awrawr-pc (has the LAN route + SSH).
+Standalone Kodi addon fleet + rig for the two-box fleet (CoreELEC 246,
+Android-TV Kodi 225). Lives in this repo; runs from awrawr-pc (LAN + SSH).
+Box inventory, credentials and env: `pens/estate/devices/coreelec/` (`.env`
+gitignored; `docs/box-inventory.md` is the committed live inventory).
+One-shot tooling (kodi-handoff/kodi-audit/kodi-resume): `estate-ops`.
 
 ## Boxes
 
@@ -61,8 +64,9 @@ tv/audio settings, which stay per-box.
 
 - **parked/** — retired tooling: `kodi-sync` was parked 2026-09-19 (the Architect: "cancel"); its `NOTE.md` records the incident analysis that killed it.
 
-Deployed copies: `/home/toxic/bin/kodi-handoff` (symlink or copy of `bin/` source).
-Keep the repo source canonical; re-deploy after edits.
+Tooling source lives in `estate-ops/kodi-handoff` (canonical) and deploys to
+`~/.local/bin`. This repo ships the Kodi addons (lasso, manifold-upstream) and
+the autonomous rig (`bin/run`, `bin/check`). Keep the repo source canonical.
 
 ## Docs (`docs/`)
 
@@ -81,7 +85,7 @@ Keep the repo source canonical; re-deploy after edits.
 
 ## License & security
 
-**License:** MIT — [sovereign-projects LICENSE](https://github.com/toxicwind/sovereign-projects#license).
+**License:** MIT + upstream — [kodi-fleet LICENSE](https://github.com/toxicwind/kodi-fleet#license).
 
 - Box 246 is reached over SSH (`root`/`coreelec`) and both boxes expose JSON-RPC on `:8080` **with no auth** — this tooling assumes a trusted LAN. Change the CoreELEC default credentials and never expose these ports beyond your LAN.
 - `kodi-audit settings --dupe` and `kodi-resume --apply` mutate box state; every mutating path defaults to dry-run / report-only by design.
